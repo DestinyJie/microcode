@@ -134,8 +134,9 @@ const Icon = defineComponent({
   width: 32px;
   height: 32px;
   margin: 10px 8px 10px 18px;
-  border-radius: 8px;
-  background-color: var(--color-primary);
+  border: 1px solid var(--color-gray-700);
+  border-radius: 10px;
+  background-color: var(--color-white);
 }
 
 .app-logo img {
