@@ -10,17 +10,17 @@ const router = createRouter({
       component: AppView,
       children: [
         {
-          path: 'dataSource',
+          path: '/dataSource',
           name: 'dataSource',
           component: () => import('../views/DataSourceView.vue')
         },
         {
-          path: 'layout',
+          path: '/layout',
           name: 'layout',
           component: () => import('../views/PageLayoutView.vue')
         },
         {
-          path: 'actions',
+          path: '/actions',
           name: 'actions',
           component: () => import('../views/ActionsView.vue')
         }

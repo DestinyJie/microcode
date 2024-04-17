@@ -23,9 +23,9 @@ export const SmoothDndContainer=defineComponent({
     mounted() {
         const options:any=Object.assign({},this.$props)
         for(const key in eventEmitterMap){
-            const EventKey=key as EventKey
-            options[eventEmitterMap[EventKey]]=(props:any)=>{
-                this.$emit(EventKey,props)
+            const eventKey=key as EventKey
+            options[eventEmitterMap[eventKey]]=(props:any)=>{
+                this.$emit(eventKey,props)
             }
         }
         const containerElement=this.$refs.container || this.$el

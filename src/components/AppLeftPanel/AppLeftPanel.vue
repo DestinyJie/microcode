@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
+import { Page, SmartOptimization } from '@icon-park/vue-next'
 import OutlineDrawer from './OutlineDrawer.vue'
 import BlocksDrawer from './BlocksDrawer.vue'
 
@@ -17,21 +18,23 @@ const toggleDrawer=(drawerMode:DrawerMode=null)=>{
 <template>
     <div class="app-left-panel-wrapper">
         <div class="app-left-panel-bar" :style="{boxShadow:'var(--color-gray-300) 1px 0px 0px'}">
-<div :class="['app-left-panel-item',isDrawerShown]==='blocks'&&'active'" @click="toggleDrawer('outline')">
+<div :class="['app-left-panel-item',isDrawerShown==='outline'&&'active']" @click="toggleDrawer('outline')">
 <Page size="20" :style="{lineHeight:0.7}" />
 </div>
-<div :class="['app-left-panel-item',isDrawerShown]==='blocks'&&'active'" @click="toggleDrawer('outline')">
+<div :class="['app-left-panel-item',isDrawerShown==='blocks'&&'active']" @click="toggleDrawer('blocks')">
 <SmartOptimization size="20" :style="{lineHeight:0.7}" />
 </div>
-<Transtion name="app-left-panel-drawer">
+</div>
+<Transition name="app-left-panel-drawer">
     <div v-if="!!isDrawerShown" class="app-left-panel-drawer">
         <div class="app-left-panel-drawer-content">
-            <component v-if="!!isDrawerShown" :is="isDrawerShown==='outline'?OutlineDrawer:BlocksDrawer"/>
+            <component 
+            v-if="!!isDrawerShown" 
+            :is="isDrawerShown==='outline'? OutlineDrawer : BlocksDrawer"
+            />
         </div>
     </div>
-</Transtion>
-        </div>
-
+</Transition>
     </div>
 </template>
 

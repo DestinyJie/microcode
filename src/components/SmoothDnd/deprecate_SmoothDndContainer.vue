@@ -19,7 +19,7 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div class="smooth-dnd-wrapper">
+  <div ref="containerRef" class="smooth-dnd-wrapper">
     <slot v-for="(d,i) in data" :key="d" :name="i" :data="d"></slot>
   </div>
 </template>
