@@ -21,7 +21,7 @@ import AppNavigator from '../components/AppNavigator.vue'
     height: 100%;
 }
 main{
-    height:calc(100%-48px);
+    height:calc(100% - 48px);
 }
 
 </style>
