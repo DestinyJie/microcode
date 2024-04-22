@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { blocks as blocksData } from '@/mocks/blocks'
+import type { BlockInfo } from '@/types/block'
 
 export const useAppEditorStore = defineStore('appEditor', () => {
   const currentBlockId = ref<string | null>(null)
@@ -14,5 +15,13 @@ export const useAppEditorStore = defineStore('appEditor', () => {
     blocks.value = newBlocks
   }
 
-  return { currentBlockId, blocks, selectBlock, updateBlocks }
+  function updateBlock(id:string,newBlock:BlockInfo){
+    for(const block of blocks.value){
+      if(block.id===id){
+        Object.assign(block,newBlock)
+
+      }
+    }
+  }
+  return { currentBlockId, blocks, selectBlock, updateBlocks,updateBlock }
 })

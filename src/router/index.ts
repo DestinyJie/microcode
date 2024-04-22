@@ -10,17 +10,27 @@ const router = createRouter({
       component: AppView,
       children: [
         {
-          path: '/dataSource',
+          path: 'dataSource',
           name: 'dataSource',
-          component: () => import('../views/DataSourceView.vue')
+          component: () => import('../views/DataSourceView.vue'),
+          children:[
+            {
+              path:':id',
+              component:()=>import('@/views/DataDourceContent/DataDourceContent.vue')
+            },
+            {
+              path:'',
+              redirect:'/app/dataSource/1'
+            }
+          ]
         },
         {
-          path: '/layout',
+          path: 'layout',
           name: 'layout',
           component: () => import('../views/PageLayoutView.vue')
         },
         {
-          path: '/actions',
+          path: 'actions',
           name: 'actions',
           component: () => import('../views/ActionsView.vue')
         }
@@ -33,6 +43,10 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path:'/',
+      redirect:'/app/layout'
     }
   ]
 })

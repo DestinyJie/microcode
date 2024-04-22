@@ -20,8 +20,17 @@ const STATUS_MAP = {
     icon: Wallet
   }
 }
-const status = 'success'
-const { color, bgColor, /* borderColor, */ icon } = STATUS_MAP[status]
+const props=withDefaults(
+  defineProps<{
+    status:keyof typeof STATUS_MAP
+    content:string
+  }>(),
+  {
+    status:'success',
+    content:'quote'
+  }
+)
+const { color, bgColor, icon } = STATUS_MAP[props.status]
 </script>
 
 <template>
@@ -30,7 +39,7 @@ const { color, bgColor, /* borderColor, */ icon } = STATUS_MAP[status]
     :style="{ backgroundColor: bgColor, color /* , border: `1px solid ${borderColor}` */ }"
   >
     <component :is="icon" />
-    <span class="quote-text">quote</span>
+    <span class="quote-text">{{ content }}</span>
   </div>
 </template>
 
@@ -41,9 +50,7 @@ const { color, bgColor, /* borderColor, */ icon } = STATUS_MAP[status]
   flex: 1;
   font-size: var(--font-size-large);
   padding: 8px 18px;
-  border-radius: 8px;
-  /* background-color: ; */
-}
+  border-radius: 8px;}
 .quote-text {
   margin-left: 6px;
 }

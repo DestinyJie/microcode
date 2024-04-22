@@ -1,18 +1,12 @@
-import type { BlockType } from '@/types/block'
+import type { BlockType,BlockInfo } from '@/types/block'
 
-export const blocks: {
-    id: string
-    type: BlockType
-    label: string
-    props: Record<string, string>
-  }[] = [
+export const blocks: BlockInfo[] = [
     {
       id: '1',
       type: 'quote',
       label: '引述',
       props: {
-        title: '引述标题',
-        subTitle: '引述副标题'
+        content:'引述文本'
       }
     },
     {
@@ -20,8 +14,7 @@ export const blocks: {
       type: 'notes',
       label: '笔记',
       props: {
-        title: '笔记标题',
-        subTitle: '笔记副标题'
+        content:`<p>笔记内容</p>`
       }
     },
     {
@@ -29,8 +22,7 @@ export const blocks: {
       type: 'heroTitle',
       label: '超级标题',
       props: {
-        title: '超级标题',
-        subTitle: '超级副标题'
+        content: '超级标题',
       }
     },
     {
@@ -38,8 +30,7 @@ export const blocks: {
       type: 'image',
       label: '图片',
       props: {
-        title: '图片标题',
-        subTitle: '图片副标题'
+        url:'https://img0.baidu.com/it/u=2601877379,2549788249&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400'
       }
     },
     {
@@ -47,8 +38,7 @@ export const blocks: {
       type: 'view',
       label: '视图',
       props: {
-        title: '视图标题',
-        subTitle: '视图副标题'
+        content: '视图内容',
       }
     },
     {
@@ -56,8 +46,7 @@ export const blocks: {
       type: 'chart',
       label: '图表',
       props: {
-        title: '图表标题',
-        subTitle: '图表副标题'
+        content: '图表内容',
       }
     },
     {
@@ -65,8 +54,7 @@ export const blocks: {
       type: 'button',
       label: '按钮',
       props: {
-        title: '按钮标题',
-        subTitle: '按钮副标题'
+        content: '按钮文案',
       }
     },
     {
@@ -74,8 +62,7 @@ export const blocks: {
       type: 'form',
       label: '表单',
       props: {
-        title: '表单标题',
-        subTitle: '表单副标题'
+        fields: [],
       }
     }
   ]

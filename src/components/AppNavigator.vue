@@ -37,7 +37,7 @@ const envStore = useEnvStore()
 
 const route = useRoute()
 
-const activeLink = computed(() => route.name)
+const activeLink = computed(() => route.path)
 
 
 const Icon = defineComponent({
@@ -76,8 +76,8 @@ const Icon = defineComponent({
         class="app-navigator-link-item"
         v-for="item in linkItems"
         :key="item.value"
-        :style="activeLink === item.value && { background: item.bg }"
-        :to="item.value"
+        :style="activeLink.includes(item.value)  && { background: item.bg }"
+        :to="`/app/${item.value}`"
       >
         <!-- defineComponent + h 代替条件渲染 -->
         <!-- <div v-if="item.value === 'dataSource'"><Data /></div>
@@ -86,17 +86,17 @@ const Icon = defineComponent({
         <div
           :style="{
             lineHeight: 0.7,
-            color: activeLink === item.value ? item.color : 'var(--color-gray-700)'
+            color: activeLink.includes(item.value)  ? item.color : 'var(--color-gray-700)'
           }"
         >
-          <Icon :type="item.value" :active="activeLink === item.value" />
+          <Icon :type="item.value" :active="activeLink.includes(item.value)" />
         </div>
         <span class="item-title">
           {{ item.label }}
         </span>
         <div
           class="item-border"
-          :style="activeLink === item.value ? { background: item.borderColor } : {}"
+          :style="activeLink.includes(item.value) ? { background: item.borderColor } : {}"
         ></div>
       </RouterLink>
     </div>

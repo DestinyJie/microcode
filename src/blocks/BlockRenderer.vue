@@ -44,7 +44,7 @@ const applyDrag = <T extends any[]>(arr: T, dragResult: DropResult) => {
     <smooth-dnd-draggable v-for="(block, i) in blocks" :key="block.id">
       <div class="block-wrapper" @click.stop="selectBlock(block.id)">
         <!-- @vue-ignore -->
-        <component :is="$blocksMap[block.type].material" class="block" />
+        <component :is="$blocksMap[block.type].material" :content="block.props?.content" class="block" />
         <div
           :class="[
             'block-wrapper-indicator',

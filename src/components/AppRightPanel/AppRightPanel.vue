@@ -3,6 +3,7 @@ import { useAppEditorStore } from '@/stores/appEditor';
 import { blocks } from '@/mocks/blocks';
 import { blocksBaseMeta } from '@/constants/blocksBaseMeta';
 import { computed } from 'vue';
+import QuoteSetting from '@/components/AppRightPanel/QuoteSeting.vue'
 
 const appEditorStore=useAppEditorStore()
 const blocksMap=computed(()=>{
@@ -24,8 +25,10 @@ const currentBlockInfo=computed(()=>{
     {{ blocksBaseMeta[currentBlockInfo.type].name }}
   </div>
 <div class="app-right-panel-content">
+  <QuoteSetting :blockInfo="currentBlockInfo" @change="(val) => appEditorStore.updateBlock(currentBlockInfo?.id,val)" />
   {{ currentBlockInfo.type }}
 </div>
+<input v-if="currentBlockInfo.type==='quote'" :defaultValue="currentBlockInfo.label" />
 </template>
   </div>
 </template>
