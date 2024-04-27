@@ -1,23 +1,30 @@
 <script setup lang="ts">
 import { useFieldArray, useForm } from 'vee-validate'
-import type { QuoteBlockInfo } from '@/types/block'
+import type { BlockInfo, QuoteBlockInfo } from '@/types/block'
+import { watch } from 'vue';
 
 
 const props=defineProps<{
     blockInfo:QuoteBlockInfo
 }>()
-const emit=defineEmits(['change'])
-const {values,validate,defineInputBinds}=useForm()
+const emit=defineEmits<{(event:'change',block:BlockInfo):void}>()
+const {values,validate,defineInputBinds}=useForm({
+  initialValues:{
+    content:props.blockInfo.props.content
+  }
+})
 const {fields,push}=useFieldArray('blocks')
 const content =defineInputBinds('content')
-
+watch([values],([newValues])=>{
+  emit('change',{...props.blockInfo,props:{...props.blockInfo.props,...newValues}})
+})
 </script>
 
 <template>
   <div class="">
     {{ props.blockInfo.type }}
   </div>
-  <input class="content-input" v-bind="content" @change="emit('change',$event.target.value)" />
+  <input class="content-input" v-bind="content"/>
   <input class="content-input" v-for="field in fields" :key="field.key" v-model="field.value"/>
   <button @click="push(new Date().toLocaleTimeString())">添加</button>
 
