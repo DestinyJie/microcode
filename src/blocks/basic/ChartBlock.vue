@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import ChartRenderer from '@/components/ChartRenderer/ChartRenderer.vue';
+
 </script>
 
 <template>
-  <div class="left-panel-wrapper">Chart</div>
+<div class="chart">
+  <ChartRenderer />
+</div>
 </template>
 
-<style scoped lang=""></style>
+<style scoped>
+.chart{
+  width:100%;
+}
+</style>
