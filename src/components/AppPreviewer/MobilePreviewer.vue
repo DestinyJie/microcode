@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import StatusBar from './StatusBar.vue'
 import PreviewModeSwitcher from './PreviewModeSwitcher.vue'
-import BlockRenderer from '@/blocks/BlockRenderer.vue'
+import BlocksRenderer from '@/blocks/BlocksRenderer.vue'
 import { useFullscreen } from '@vueuse/core'
 
 import type { PreviewType } from './type'
@@ -34,7 +34,7 @@ function greet(mode: PreviewType) {
         </div>
       </div>
       <div class="simulator">
-        <BlockRenderer/>
+        <BlocksRenderer/>
       </div>
     </div>
   </div>

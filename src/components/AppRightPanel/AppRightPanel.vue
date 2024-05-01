@@ -5,6 +5,7 @@ import { blocksBaseMeta } from '@/constants/blocksBaseMeta';
 import { computed } from 'vue';
 import QuoteSetting from '@/components/AppRightPanel/QuoteSeting.vue'
 import type { BlockInfo } from '@/types/block';
+import ChartSetting from './ChartSetting.vue';
 
 const appEditorStore=useAppEditorStore()
 const blocksMap=computed(()=>{
@@ -16,6 +17,18 @@ const blocksMap=computed(()=>{
 const currentBlockInfo=computed(()=>{
   if(!appEditorStore.currentBlockId) return null
   return blocksMap.value[appEditorStore.currentBlockId]
+})
+const blockSetting=computed(()=>{
+  switch(currentBlockInfo.value?.type){
+    case 'quote':{
+      return QuoteSetting
+    }
+    case 'chart':{
+      return ChartSetting
+    }
+    default:
+    return ''
+  }
 })
 </script>
 
@@ -29,7 +42,7 @@ const currentBlockInfo=computed(()=>{
   <QuoteSetting :blockInfo="currentBlockInfo" @change="(val) => appEditorStore.updateBlock(currentBlockInfo?.id,val)" />
   {{ currentBlockInfo.type }}
 </div> -->
-<component :is="currentBlockInfo.type==='quote'&& QuoteSetting" :blockInfo="currentBlockInfo" @change="(block:BlockInfo)=>appEditorStore.updateBlock(block.id,block)" />
+<component :is="blockSetting" :blockInfo="currentBlockInfo" @change="(block:BlockInfo)=>appEditorStore.updateBlock(block.id,block)" />
 <input v-if="currentBlockInfo.type==='quote'" :defaultValue="currentBlockInfo.label" />
 </template>
   </div>

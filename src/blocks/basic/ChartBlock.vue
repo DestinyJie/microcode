@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import ChartRenderer from '@/components/ChartRenderer/ChartRenderer.vue';
-
+import type {ChartBlockInfo} from '@/types/block'
+defineProps<{
+  blockInfo:ChartBlockInfo
+}>()
 </script>
 
 <template>
 <div class="chart">
-  <ChartRenderer />
+  <ChartRenderer :blockInfo="blockInfo"/>
 </div>
 </template>
 

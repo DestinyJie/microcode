@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useFieldArray, useForm } from 'vee-validate'
-import type { BlockInfo, QuoteBlockInfo } from '@/types/block'
+import type {  QuoteBlockInfo } from '@/types/block'
 import { watch } from 'vue';
 
 
 const props=defineProps<{
     blockInfo:QuoteBlockInfo
 }>()
-const emit=defineEmits<{(event:'change',block:BlockInfo):void}>()
+const emit=defineEmits<{(event:'change',block:QuoteBlockInfo):void}>()
 const {values,validate,defineInputBinds}=useForm({
   initialValues:{
     content:props.blockInfo.props.content

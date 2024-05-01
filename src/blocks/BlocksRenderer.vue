@@ -1,34 +1,51 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { toRaw } from 'vue'
 import { Drag, Delete } from '@icon-park/vue-next'
 import { useEnvStore } from '@/stores/debug'
 import { useAppEditorStore } from '@/stores/appEditor'
-import { smoothDnD,  dropHandlers } from 'smooth-dnd'
+import { smoothDnD, type DropResult, dropHandlers } from 'smooth-dnd'
+import { arrayMove } from '@/utils/array'
+import { SmoothDndContainer } from '@/components/SmoothDnd/SmoothDndContainer'
+import { SmoothDndDraggable } from '@/components/SmoothDnd/SmoothDndDraggable'
 import { storeToRefs } from 'pinia'
-import type { BlockInfo } from '@/types/block'
-const p =defineProps<{block:BlockInfo, i:number}>()
+import BlockRenderer from './BlockRenderer.vue'
 smoothDnD.dropHandler = dropHandlers.reactDropHandler().handler
 const envStore=useEnvStore()
 const appEditorStore = useAppEditorStore()
-const blockWrapperRef=ref<HTMLElement | null>(null)
-const { currentBlockId, blocks } = storeToRefs(appEditorStore)
-const { selectBlock } = appEditorStore
+const {  blocks } = storeToRefs(appEditorStore)
+const { updateBlocks } = appEditorStore
+const applyDrag = <T extends any[]>(arr: T, dragResult: DropResult) => {
+  const { removedIndex, addedIndex, payload } = dragResult
+  const result = [...arr]
+  // 没做操作
+  if (addedIndex === null) return result
+  // 添加
+  if (addedIndex !== null && removedIndex === null) {
+    result.splice(addedIndex, 0, {
+      id: `${Math.random()}`,
+      ...payload
+    })
+  }
+  // 移动
+  if (addedIndex !== null && removedIndex !== null) {
+    return arrayMove(result, removedIndex, addedIndex)
+  }
+  return result
+}
 </script>
 
 <template>
- <div class="block-wrapper" ref="blockWrapperRef" @click.stop="selectBlock(block.id)">
-<component :is="$blocksMap[block.type].material" class="block" :blockInfo="block" />
-<div :class="['block-wrapper-indicator',{shown:envStore.debug,selected:currentBlockId===block.id}]">
-  <div class="block-toolbar" v-if="currentBlockId === block.id">
-        <div class="block-toolbar-item handle">
-          <drag />
-        </div>
-        <div class="block-toolbar-item" @click="blocks.splice(i, 1)">
-          <delete />
-        </div>
-        </div>
-</div>
- </div>
+  <smooth-dnd-container
+    drag-handle-selector=".handle"
+    group-name="blocks"
+    orientation="vertical"
+    tag="div"
+    @drop="updateBlocks(applyDrag(toRaw(blocks), $event))"
+  >
+    <smooth-dnd-draggable v-for="(block, i) in blocks" :key="block.id">
+     <BlockRenderer :block="block" :i="i" />
+    </smooth-dnd-draggable>
+  </smooth-dnd-container>
 </template>
 
 <style scoped>

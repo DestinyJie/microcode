@@ -1,4 +1,4 @@
-import type { BlockType,BlockInfo } from '@/types/block'
+import type { BlockInfo } from '@/types/block'
 
 export const blocks: BlockInfo[] = [
     {
@@ -38,7 +38,13 @@ export const blocks: BlockInfo[] = [
       type: 'view',
       label: '视图',
       props: {
-        content: '视图内容',
+        fields:{
+          'id':{
+            type:'text'
+          }
+        },
+        fieldProps:[],
+        data:[]
       }
     },
     {
@@ -46,7 +52,7 @@ export const blocks: BlockInfo[] = [
       type: 'chart',
       label: '图表',
       props: {
-        content: '图表内容',
+        chartType:'echarts'
       }
     },
     {

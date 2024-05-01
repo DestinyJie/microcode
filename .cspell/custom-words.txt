@@ -11,3 +11,4 @@ vueaury
 vuedraggable
 vuejs
 vueuse
+zrender
