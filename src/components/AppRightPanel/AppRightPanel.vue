@@ -6,9 +6,11 @@ import { computed } from 'vue';
 import QuoteSetting from '@/components/AppRightPanel/QuoteSeting.vue'
 import type { BlockInfo } from '@/types/block';
 import ChartSetting from './ChartSetting.vue';
+import SchemaExporter from './SchemaExporter.vue';
 
 const appEditorStore=useAppEditorStore()
 const blocksMap=computed(()=>{
+  const {blocks}=appEditorStore
   return blocks.reduce<Record<string,(typeof blocks)[0]>>((acc,cur)=>{
     acc[cur.id]=cur
     return acc
@@ -43,6 +45,7 @@ const blockSetting=computed(()=>{
   {{ currentBlockInfo.type }}
 </div> -->
 <component :is="blockSetting" :blockInfo="currentBlockInfo" @change="(block:BlockInfo)=>appEditorStore.updateBlock(block.id,block)" />
+  <SchemaExporter :currentBlockInfo="currentBlockInfo" />
 <input v-if="currentBlockInfo.type==='quote'" :defaultValue="currentBlockInfo.label" />
 </template>
   </div>
@@ -62,6 +65,9 @@ const blockSetting=computed(()=>{
   height: 44px;
   line-height: 44px;
   padding: 0 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 .app-right-panel-content{
   padding: 0 16px 20px;

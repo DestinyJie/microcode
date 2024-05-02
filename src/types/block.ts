@@ -29,11 +29,13 @@ export interface ViewBlockInfo extends BaseBlockInfo{
     }
 }
 
+export type QuoteBlockStatus = 'success' | 'warning' | 'error'
 
 export interface QuoteBlockInfo extends BaseBlockInfo{
     type:'quote'
     props:{
-        content:string
+        content:string,
+        status:QuoteBlockStatus
     }
 }
 

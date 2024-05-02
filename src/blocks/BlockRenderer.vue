@@ -6,7 +6,7 @@ import { useAppEditorStore } from '@/stores/appEditor'
 import { smoothDnD,  dropHandlers } from 'smooth-dnd'
 import { storeToRefs } from 'pinia'
 import type { BlockInfo } from '@/types/block'
-const p =defineProps<{block:BlockInfo, i:number}>()
+defineProps<{block:BlockInfo, i:number}>()
 smoothDnD.dropHandler = dropHandlers.reactDropHandler().handler
 const envStore=useEnvStore()
 const appEditorStore = useAppEditorStore()

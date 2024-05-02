@@ -6,7 +6,8 @@ export const blocks: BlockInfo[] = [
       type: 'quote',
       label: '引述',
       props: {
-        content:'引述文本'
+        content:'引述文本',
+        status:'success'
       }
     },
     {

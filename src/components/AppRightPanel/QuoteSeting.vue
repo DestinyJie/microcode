@@ -21,17 +21,26 @@ watch([values],([newValues])=>{
 </script>
 
 <template>
-  <div class="">
-    {{ props.blockInfo.type }}
+  <div class="quote-setting">
+    <div>    {{ props.blockInfo.type }}
+</div>
   </div>
   <input class="content-input" v-bind="content"/>
   <input class="content-input" v-for="field in fields" :key="field.key" v-model="field.value"/>
-  <button @click="push(new Date().toLocaleTimeString())">添加</button>
+  <button class="add-button" @click="push(new Date().toLocaleTimeString())">添加</button>
 
 </template>
 
 
 <style scoped>
+.quote-setting {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+  font-size: var(--font-size-large);
+  border-radius: 8px;
+}
 .content-input {
   width: 100%;
   height: 32px;
@@ -41,5 +50,13 @@ watch([values],([newValues])=>{
   border-radius: 8px;
   outline-style: none;
   color: var(--color-gray-800);
+}
+.add-button {
+  margin-top: 6px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-300);
+  cursor: pointer;
 }
 </style>
