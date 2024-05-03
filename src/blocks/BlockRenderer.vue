@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { Drag, Delete } from '@icon-park/vue-next'
 import { useEnvStore } from '@/stores/debug'
 import { useAppEditorStore } from '@/stores/appEditor'
@@ -13,12 +13,13 @@ const appEditorStore = useAppEditorStore()
 const blockWrapperRef=ref<HTMLElement | null>(null)
 const { currentBlockId, blocks } = storeToRefs(appEditorStore)
 const { selectBlock } = appEditorStore
+const editable=inject('editable',true)
 </script>
 
 <template>
  <div class="block-wrapper" ref="blockWrapperRef" @click.stop="selectBlock(block.id)">
 <component :is="$blocksMap[block.type].material" class="block" :blockInfo="block" />
-<div :class="['block-wrapper-indicator',{shown:envStore.debug,selected:currentBlockId===block.id}]">
+<div v-if="editable" :class="['block-wrapper-indicator',{shown:envStore.debug,selected:currentBlockId===block.id}]">
   <div class="block-toolbar" v-if="currentBlockId === block.id">
         <div class="block-toolbar-item handle">
           <drag />

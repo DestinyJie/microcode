@@ -4,7 +4,7 @@
         <span>导出 JSON</span>
         <copy class="icon" @click="handleCopyText" />
       </div>
-      <vue-json-pretty showIcon showLineNumber editable :data="currentBlockInfo" />
+      <vue-json-pretty   class="json-pretty" showIcon showLineNumber editable :data="currentBlockInfo" />
     </div>
   </template>
   
@@ -49,4 +49,17 @@
   .icon:hover {
     color: var(--color-primary);
   }
-  </style>
+  .json-pretty {
+  color: var(--color-gray-800);
+}
+</style>
+
+<style>
+.vjs-tree-node {
+  border-radius: 6px;
+}
+.vjs-tree-node:hover {
+  background-color: var(--color-gray-300);
+  font-weight: var(--font-weight-bolder);
+}
+</style>

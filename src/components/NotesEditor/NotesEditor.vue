@@ -3,7 +3,10 @@ import { TextBold, TextItalic, Strikethrough } from '@icon-park/vue-next'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { ColorHighlighter } from './extensions/ColorHighlighter'
+import { inject } from 'vue';
+const editable=inject('editable',true)
 const editor = useEditor({
+  editable,
   extensions: [
     StarterKit.configure({
       bold: {
@@ -23,8 +26,8 @@ const editor = useEditor({
 </script>
 
 <template>
-  <div class="notes-editor-wrapper">
-    <div class="notes-editor-header">
+  <div :class="['notes-editor-wrapper',editable&&'editable']">
+    <div v-if="editable" class="notes-editor-header">
       <button
         class="notes-editor-header-button"
         @click="editor?.chain().focus().toggleBold().run()"
@@ -48,7 +51,7 @@ const editor = useEditor({
   </div>
 </template>
 <style scoped>
-.notes-editor-wrapper {
+.notes-editor-wrapper.editable {
   flex: 1;
   position: relative;
   display: flex;
