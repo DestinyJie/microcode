@@ -15,6 +15,7 @@
   const props = defineProps<{
     currentBlockInfo: any
   }>()
+  console.log("data:🎪",props)
   const handleCopyText = () => {
     try {
       const blockJsonString = JSON.stringify(props.currentBlockInfo)
