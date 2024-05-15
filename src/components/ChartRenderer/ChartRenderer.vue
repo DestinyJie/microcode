@@ -4,7 +4,6 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { LineChart } from 'echarts/charts'
 import {
   TitleComponent,
-  TooltipComponent,
   LegendComponent,
   ToolboxComponent,
   GridComponent

@@ -26,8 +26,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <LaptopPreviewer v-if="device === 'laptop'" />
-  <MobilePreviewer v-if="device === 'mobile'" />
+  <LaptopPreviewer  v-memo="[device === 'laptop']"  v-if="device === 'laptop'" />
+  <MobilePreviewer  v-memo="[device === 'mobile']" v-if="device === 'mobile'" />
 </template>
 
 <style scoped>

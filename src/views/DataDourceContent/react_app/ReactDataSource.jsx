@@ -69,7 +69,6 @@ const columns = [
 // once data is loaded.
 function getData([col, row]) {
   const person = data[row]
-
   switch (col) {
     case 0: {
       return {
