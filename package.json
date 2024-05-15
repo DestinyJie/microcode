@@ -23,11 +23,6 @@
     "*.{vue,ts}": "eslint --fix",
     "*.{html,vue,css,sass,scss}": "stylelint --fix"
   },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git"
-    }
-  },
   "dependencies": {
     "@glideapps/glide-data-grid": "^6.0.3",
     "@icon-park/vue-next": "1.4.2",

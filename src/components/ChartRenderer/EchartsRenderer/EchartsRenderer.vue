@@ -14,7 +14,7 @@
     GridComponent
   } from 'echarts/components'
   import VChart, { THEME_KEY } from 'vue-echarts'
-  import { ref, provide ,onMounted} from 'vue'
+  import { ref, provide ,onMounted,onBeforeUnmount} from 'vue'
   use([
     CanvasRenderer,
     LineChart,
@@ -213,9 +213,10 @@ onMounted(() => {
     chartInstance.value?.resize()
   }
   window.addEventListener('resize', resizeHandler)
-  return () => {
-    window.removeEventListener('resize', resizeHandler)
-  }
+  onBeforeUnmount(() => {
+  window.removeEventListener('resize', resizeHandler)
+  chartInstance.value?.dispose()
+})
 })
   </script>
   
