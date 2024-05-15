@@ -38,7 +38,7 @@ const blockSetting=computed(()=>{
   <div class="app-right-panel-wrapper">
 <template v-if="currentBlockInfo">
   <div class="app-right-panel-header">
-    {{ blocksBaseMeta[currentBlockInfo.type].name }}
+    {{ blocksBaseMeta[currentBlockInfo.type].label }}
   </div>
 <!-- <div class="app-right-panel-content">
   <QuoteSetting :blockInfo="currentBlockInfo" @change="(val) => appEditorStore.updateBlock(currentBlockInfo?.id,val)" />
