@@ -14,7 +14,7 @@
     GridComponent
   } from 'echarts/components'
   import VChart, { THEME_KEY } from 'vue-echarts'
-  import { ref, provide } from 'vue'
+  import { ref, provide ,onMounted} from 'vue'
   use([
     CanvasRenderer,
     LineChart,
@@ -207,6 +207,16 @@
       }
     ]
   })
+  const chartInstance = ref<InstanceType<typeof VChart>>()
+onMounted(() => {
+  const resizeHandler = () => {
+    chartInstance.value?.resize()
+  }
+  window.addEventListener('resize', resizeHandler)
+  return () => {
+    window.removeEventListener('resize', resizeHandler)
+  }
+})
   </script>
   
   <style scoped>

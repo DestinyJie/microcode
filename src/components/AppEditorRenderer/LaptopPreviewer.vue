@@ -3,18 +3,26 @@ import type { PreviewType } from './type'
 import PreviewModeSwitcher from './PreviewModeSwitcher.vue'
 import AppLaptopPreviewer from '@/components/AppPreviewer/LaptopPreviewer.vue'
 import {ref } from 'vue';
-import { useFullscreen } from '@vueuse/core'
 
 const props = defineProps<{
   previewMode?: PreviewType
 }>()
 const runner=ref<HTMLElement | null>(null)
-const {toggle}=useFullscreen(runner)
 const emit = defineEmits<{
   'preview-mode-change': [mode: PreviewType]
 }>()
 function greet(mode: PreviewType) {
   emit('preview-mode-change', mode)
+}
+function toggle() {
+  if (!runner.value) {
+    return
+  }
+  if (document.fullscreenElement) {
+    document.exitFullscreen()
+  } else {
+    runner.value.requestFullscreen()
+  }
 }
 </script>
 

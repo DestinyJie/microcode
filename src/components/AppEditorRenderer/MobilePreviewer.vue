@@ -2,7 +2,6 @@
 import StatusBar from './StatusBar.vue'
 import PreviewModeSwitcher from './PreviewModeSwitcher.vue'
 import AppMobilePreviewer from '@/components/AppPreviewer/MobilePreviewer.vue'
-import { useFullscreen } from '@vueuse/core'
 
 import type { PreviewType } from './type'
 import { ref } from 'vue';
@@ -11,7 +10,6 @@ const props = defineProps<{
   previewMode?: PreviewType
 }>()
 const runner=ref<HTMLElement | null>(null)
-const {toggle}=useFullscreen(runner)
 const emit = defineEmits<{
   'preview-mode-change': [mode: PreviewType]
 }>()
@@ -24,7 +22,7 @@ function greet(mode: PreviewType) {
 <template>
   <div class="layout-runner" ref="runner">
     <div class="layout-runner-navigator">
-      <PreviewModeSwitcher :preview-mode="props.previewMode" @preview-mode-change="greet" @full-screen="toggle"/>
+      <PreviewModeSwitcher :preview-mode="props.previewMode" @preview-mode-change="greet" />
     </div>
     <div class="simulator-wrapper">
       <div class="simulator-header">
