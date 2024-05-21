@@ -84,6 +84,7 @@ export const setup = (app: App<Element>) => {
   }
   app.use(ins)
 }
+// @ts-ignore: works on Vue 3, fails in Vue 2
 declare module "@vue/runtime-core" {
     export interface ComponentCustomProperties{
        $blocksMap:string

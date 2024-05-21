@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { toRaw } from 'vue'
-import { Drag, Delete } from '@icon-park/vue-next'
-import { useEnvStore } from '@/stores/debug'
 import { useAppEditorStore } from '@/stores/appEditor'
 import { smoothDnD, type DropResult, dropHandlers } from 'smooth-dnd'
 import { arrayMove } from '@/utils/array'
@@ -10,7 +8,6 @@ import { SmoothDndDraggable } from '@/components/SmoothDnd/SmoothDndDraggable'
 import { storeToRefs } from 'pinia'
 import BlockRenderer from './BlockRenderer.vue'
 smoothDnD.dropHandler = dropHandlers.reactDropHandler().handler
-const envStore=useEnvStore()
 const appEditorStore = useAppEditorStore()
 const {  blocks } = storeToRefs(appEditorStore)
 const { updateBlocks } = appEditorStore

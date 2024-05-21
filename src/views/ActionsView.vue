@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import FlowEditor from '@/components/FlowEditor/FlowEditor.vue';
 
 </script>
 <template>
-    ACTIONSVIEW
+    <FlowEditor />
 </template>
 <style scoped>
 </style>
